@@ -14,7 +14,6 @@ const path = require('path');
 
 async function leArquivo(file: string): Promise<Pessoa[]>{
 
-
     //const filePath = 'source/P2.csv';
     const listaDePessoas: Pessoa[] = [];
     const filePath = "source/" + file // +".csv"
@@ -60,11 +59,43 @@ interface Pessoa {
 
 async function executar(listaDePessoas: Pessoa[], file: string){
 
-    verificacaoTotal(listaDePessoas, file);
+    verificacaoGenerica(listaDePessoas, file);
 }
 
+function verificacaoGenerica(listaDePessoas: Pessoa[], file: string){
 
-function verificacaoTotal(listaDePessoas: Pessoa[], file: string){
+    var total = listaDePessoas.length;
+
+    var intencaoVoto = encontrarValoresDiferentes(listaDePessoas);
+
+    console.log("---------")
+    console.log(file)
+
+    intencaoVoto.forEach(candidato => {
+        var votoCanditado = listaDePessoas.filter(item => item.intencaoVoto === candidato).length;
+        console.log("Voto " + candidato + ": " + votoCanditado + " = " + (votoCanditado/total *100).toFixed(2) + "%");
+
+    });
+
+    console.log("Total: " + total);
+
+}
+
+function encontrarValoresDiferentes(lista: Pessoa[]): string[] {
+    const conjuntoValoresUnicos = new Set<string>();
+    const valoresDiferentes: string[] = [];
+  
+    for (const pessoa of lista) {
+      if (!conjuntoValoresUnicos.has(pessoa.intencaoVoto) && pessoa.intencaoVoto != '#N/D' ) {
+        valoresDiferentes.push(pessoa.intencaoVoto);
+        conjuntoValoresUnicos.add(pessoa.intencaoVoto);
+      }
+    }
+  
+    return valoresDiferentes.slice().sort();
+  }
+
+function verificacaoFixa(listaDePessoas: Pessoa[], file: string){
 
     var votoA = listaDePessoas.filter(item => item.intencaoVoto === "A").length;
     var votoB = listaDePessoas.filter(item => item.intencaoVoto === "B").length;

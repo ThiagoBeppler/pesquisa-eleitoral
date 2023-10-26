@@ -85,10 +85,33 @@ function leArquivo(file) {
 function executar(listaDePessoas, file) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            verificacaoTotal(listaDePessoas, file);
+            verificacaoGenerica(listaDePessoas, file);
             return [2 /*return*/];
         });
     });
+}
+function verificacaoGenerica(listaDePessoas, file) {
+    var total = listaDePessoas.length;
+    var intencaoVoto = encontrarValoresDiferentes(listaDePessoas);
+    console.log("---------");
+    console.log(file);
+    intencaoVoto.forEach(function (candidato) {
+        var votoCanditado = listaDePessoas.filter(function (item) { return item.intencaoVoto === candidato; }).length;
+        console.log("Voto " + candidato + ": " + votoCanditado + " = " + (votoCanditado / total * 100).toFixed(2) + "%");
+    });
+    console.log("Total: " + total);
+}
+function encontrarValoresDiferentes(lista) {
+    var conjuntoValoresUnicos = new Set();
+    var valoresDiferentes = [];
+    for (var _i = 0, lista_1 = lista; _i < lista_1.length; _i++) {
+        var pessoa = lista_1[_i];
+        if (!conjuntoValoresUnicos.has(pessoa.intencaoVoto) && pessoa.intencaoVoto != '#N/D') {
+            valoresDiferentes.push(pessoa.intencaoVoto);
+            conjuntoValoresUnicos.add(pessoa.intencaoVoto);
+        }
+    }
+    return valoresDiferentes.slice().sort();
 }
 function verificacaoTotal(listaDePessoas, file) {
     var votoA = listaDePessoas.filter(function (item) { return item.intencaoVoto === "A"; }).length;
