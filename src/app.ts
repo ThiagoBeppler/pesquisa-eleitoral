@@ -15,7 +15,7 @@ const path = require('path');
 async function leArquivo(file: string): Promise<Pessoa[]>{
 
     //const filePath = 'source/P2.csv';
-    const listaDePessoas: Pessoa[] = [];
+    const listaPessoas: Pessoa[] = [];
     const filePath = "source/" + file // +".csv"
 
 
@@ -38,14 +38,14 @@ async function leArquivo(file: string): Promise<Pessoa[]>{
                     estado: values[3],
                     intencaoVoto: values[4],
                 };
-                listaDePessoas.push(pessoa);
+                listaPessoas.push(pessoa);
             }
         }
     
-        executar(listaDePessoas, file);
+        executar(listaPessoas, file);
         
     });
-    return listaDePessoas;
+    return listaPessoas;
 
 }
 
@@ -57,22 +57,22 @@ interface Pessoa {
     intencaoVoto: string;
 }
 
-async function executar(listaDePessoas: Pessoa[], file: string){
+async function executar(listaPessoas: Pessoa[], file: string){
 
-    verificacaoGenerica(listaDePessoas, file);
+    verificacaoGenerica(listaPessoas, file);
 }
 
-function verificacaoGenerica(listaDePessoas: Pessoa[], file: string){
+function verificacaoGenerica(listaPessoas: Pessoa[], file: string){
 
-    var total = listaDePessoas.length;
+    var total = listaPessoas.length;
 
-    var intencaoVoto = encontrarValoresDiferentes(listaDePessoas);
+    var intencaoVoto = encontrarValoresDiferentes(listaPessoas);
 
     console.log("---------")
     console.log(file)
 
     intencaoVoto.forEach(candidato => {
-        var votoCanditado = listaDePessoas.filter(item => item.intencaoVoto === candidato).length;
+        var votoCanditado = listaPessoas.filter(item => item.intencaoVoto === candidato).length;
         console.log("Voto " + candidato + ": " + votoCanditado + " = " + (votoCanditado/total *100).toFixed(2) + "%");
 
     });
@@ -95,11 +95,11 @@ function encontrarValoresDiferentes(lista: Pessoa[]): string[] {
     return valoresDiferentes.slice().sort();
   }
 
-function verificacaoFixa(listaDePessoas: Pessoa[], file: string){
+function verificacaoFixa(listaPessoas: Pessoa[], file: string){
 
-    var votoA = listaDePessoas.filter(item => item.intencaoVoto === "A").length;
-    var votoB = listaDePessoas.filter(item => item.intencaoVoto === "B").length;
-    var total = listaDePessoas.length;
+    var votoA = listaPessoas.filter(item => item.intencaoVoto === "A").length;
+    var votoB = listaPessoas.filter(item => item.intencaoVoto === "B").length;
+    var total = listaPessoas.length;
 
     console.log("---------")
     console.log(file)
@@ -181,9 +181,9 @@ listaArquivos();
     //             estado:  row.estado,
     //             intencaoVoto: row.intencaoVoto
     //         };
-    //         listaDePessoas.push(pessoa);
+    //         listaPessoas.push(pessoa);
     //     })
     //     .on('end', () => {
-    //         // Agora, 'listaDePessoas' contém os dados do CSV como objetos
-    //         // console.log(listaDePessoas);
+    //         // Agora, 'listaPessoas' contém os dados do CSV como objetos
+    //         // console.log(listaPessoas);
     //     });

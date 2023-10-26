@@ -46,11 +46,11 @@ var csv = require('csv-parser');
 var path = require('path');
 function leArquivo(file) {
     return __awaiter(this, void 0, void 0, function () {
-        var listaDePessoas, filePath, conteudo;
+        var listaPessoas, filePath, conteudo;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    listaDePessoas = [];
+                    listaPessoas = [];
                     filePath = "source/" + file // +".csv"
                     ;
                     return [4 /*yield*/, fs.readFile(filePath, 'utf8', function (err, data) {
@@ -70,33 +70,33 @@ function leArquivo(file) {
                                         estado: values[3],
                                         intencaoVoto: values[4],
                                     };
-                                    listaDePessoas.push(pessoa);
+                                    listaPessoas.push(pessoa);
                                 }
                             }
-                            executar(listaDePessoas, file);
+                            executar(listaPessoas, file);
                         })];
                 case 1:
                     conteudo = _a.sent();
-                    return [2 /*return*/, listaDePessoas];
+                    return [2 /*return*/, listaPessoas];
             }
         });
     });
 }
-function executar(listaDePessoas, file) {
+function executar(listaPessoas, file) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            verificacaoGenerica(listaDePessoas, file);
+            verificacaoGenerica(listaPessoas, file);
             return [2 /*return*/];
         });
     });
 }
-function verificacaoGenerica(listaDePessoas, file) {
-    var total = listaDePessoas.length;
-    var intencaoVoto = encontrarValoresDiferentes(listaDePessoas);
+function verificacaoGenerica(listaPessoas, file) {
+    var total = listaPessoas.length;
+    var intencaoVoto = encontrarValoresDiferentes(listaPessoas);
     console.log("---------");
     console.log(file);
     intencaoVoto.forEach(function (candidato) {
-        var votoCanditado = listaDePessoas.filter(function (item) { return item.intencaoVoto === candidato; }).length;
+        var votoCanditado = listaPessoas.filter(function (item) { return item.intencaoVoto === candidato; }).length;
         console.log("Voto " + candidato + ": " + votoCanditado + " = " + (votoCanditado / total * 100).toFixed(2) + "%");
     });
     console.log("Total: " + total);
@@ -113,10 +113,10 @@ function encontrarValoresDiferentes(lista) {
     }
     return valoresDiferentes.slice().sort();
 }
-function verificacaoTotal(listaDePessoas, file) {
-    var votoA = listaDePessoas.filter(function (item) { return item.intencaoVoto === "A"; }).length;
-    var votoB = listaDePessoas.filter(function (item) { return item.intencaoVoto === "B"; }).length;
-    var total = listaDePessoas.length;
+function verificacaoFixa(listaPessoas, file) {
+    var votoA = listaPessoas.filter(function (item) { return item.intencaoVoto === "A"; }).length;
+    var votoB = listaPessoas.filter(function (item) { return item.intencaoVoto === "B"; }).length;
+    var total = listaPessoas.length;
     console.log("---------");
     console.log(file);
     console.log("Voto A: " + votoA + " = " + (votoA / total * 100).toFixed(2) + "%");
