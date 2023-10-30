@@ -1,9 +1,3 @@
-// "use strict";
-// // src/app.ts
-// function sayHello(name) {
-//     console.log(`Hello, ${name}!`);
-// }
-// sayHello("World");
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -51,8 +45,7 @@ function leArquivo(file) {
             switch (_a.label) {
                 case 0:
                     listaPessoas = [];
-                    filePath = "source/" + file // +".csv"
-                    ;
+                    filePath = "source/" + file;
                     return [4 /*yield*/, fs.readFile(filePath, 'utf8', function (err, data) {
                             if (err) {
                                 console.error('Erro ao ler o arquivo:', err);

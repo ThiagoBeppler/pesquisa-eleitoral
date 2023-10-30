@@ -1,10 +1,3 @@
-// "use strict";
-// // src/app.ts
-// function sayHello(name) {
-//     console.log(`Hello, ${name}!`);
-// }
-// sayHello("World");
-
 "use strict";
 
 const fs = require('fs');
@@ -14,9 +7,8 @@ const path = require('path');
 
 async function leArquivo(file: string): Promise<Pessoa[]>{
 
-    //const filePath = 'source/P2.csv';
     const listaPessoas: Pessoa[] = [];
-    const filePath = "source/" + file // +".csv"
+    const filePath = "source/" + file;
 
 
     const conteudo = await fs.readFile(filePath, 'utf8', (err: Error | null, data: string) => {
@@ -51,10 +43,10 @@ async function leArquivo(file: string): Promise<Pessoa[]>{
 
 interface Pessoa {
     idPesquisa: string,
-    dataPesquisa: string
-    municipio: string;
-    estado: string;
-    intencaoVoto: string;
+    dataPesquisa: string,
+    municipio: string,
+    estado: string,
+    intencaoVoto: string
 }
 
 async function executar(listaPessoas: Pessoa[], file: string){
@@ -68,8 +60,8 @@ function verificacaoGenerica(listaPessoas: Pessoa[], file: string){
 
     var intencaoVoto = encontrarValoresDiferentes(listaPessoas);
 
-    console.log("---------")
-    console.log(file)
+    console.log("---------");
+    console.log(file);
 
     intencaoVoto.forEach(candidato => {
         var votoCanditado = listaPessoas.filter(item => item.intencaoVoto === candidato).length;
@@ -112,7 +104,7 @@ function verificacaoFixa(listaPessoas: Pessoa[], file: string){
 function listaArquivos(){
     const pasta = './source'; 
     const extensaoDesejada = '.csv'; 
-    var listaPesquisas :string[] = []
+    var listaPesquisas : string[] = [];
 
     fs.promises.readdir(pasta)
     .then((arquivos: any[]) => {
@@ -135,8 +127,6 @@ function listaArquivos(){
 }
 
 listaArquivos();
-
-//leArquivo();
 
 // var listaPesquisas :string[] = [
 //     "P1",
