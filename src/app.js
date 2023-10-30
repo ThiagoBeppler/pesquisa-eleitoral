@@ -36,11 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var fs = require('fs');
-var csv = require('csv-parser');
+//const csv = require('csv-parser');
 var path = require('path');
 function leArquivo(file) {
     return __awaiter(this, void 0, void 0, function () {
-        var listaPessoas, filePath, conteudo;
+        var listaPessoas, filePath;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -69,7 +69,7 @@ function leArquivo(file) {
                             executar(listaPessoas, file);
                         })];
                 case 1:
-                    conteudo = _a.sent();
+                    _a.sent();
                     return [2 /*return*/, listaPessoas];
             }
         });

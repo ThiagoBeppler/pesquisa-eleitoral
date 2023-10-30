@@ -1,7 +1,7 @@
 "use strict";
 
 const fs = require('fs');
-const csv = require('csv-parser');
+//const csv = require('csv-parser');
 const path = require('path');
 
 
@@ -11,7 +11,7 @@ async function leArquivo(file: string): Promise<Pessoa[]>{
     const filePath = "source/" + file;
 
 
-    const conteudo = await fs.readFile(filePath, 'utf8', (err: Error | null, data: string) => {
+    await fs.readFile(filePath, 'utf8', (err: Error | null, data: string) => {
         if (err) {
             console.error('Erro ao ler o arquivo:', err);
             return;
@@ -70,7 +70,6 @@ function verificacaoGenerica(listaPessoas: Pessoa[], file: string){
     });
 
     console.log("Total: " + total);
-
 }
 
 function encontrarValoresDiferentes(lista: Pessoa[]): string[] {
@@ -127,53 +126,3 @@ function listaArquivos(){
 }
 
 listaArquivos();
-
-// var listaPesquisas :string[] = [
-//     "P1",
-//     "P2",
-//     "P3",
-//     "P4",
-//     "P5",
-//     "P6"
-// ]
-
-// listaPesquisas.forEach(element => {
-//     leArquivo(element);
-// });
-
-//idPesquisa;dataPesquisa;municipio;estado;intencaoVoto
-
-//     ID_PESQUISA
-//     DATA_PESQUISA
-//     MUNICIPIO
-//     ESTADO
-//     INTENCAODEVOTO
-
-// interface Pessoa {
-    //     nome: string;
-    //     idade: number;
-    //     ocupacao: string;
-    // }
-    
-    
-
-
-    // fs.createReadStream('source/P1.csv')
-    //     .pipe(csv())
-    //     .on('data', (row: any) => {
-
-    //         console.log(row)
-
-    //         var pessoa: Pessoa = {
-    //             idPesquisa: row.idPesquisa,
-    //             dataPesquisa: row.dataPesquisa,
-    //             municipio: row.municipio,
-    //             estado:  row.estado,
-    //             intencaoVoto: row.intencaoVoto
-    //         };
-    //         listaPessoas.push(pessoa);
-    //     })
-    //     .on('end', () => {
-    //         // Agora, 'listaPessoas' contém os dados do CSV como objetos
-    //         // console.log(listaPessoas);
-    //     });
